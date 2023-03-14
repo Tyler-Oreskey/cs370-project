@@ -3,10 +3,12 @@ const { productModel } = require('../../models');
 module.exports = {
     getByUPCCode: async (req, res, next) => {
         try {
-            const result = await productModel.getByUPCCode(req.params.upc_code);
+            const { upcCode } = req.params;
+
+            const result = await productModel.getByUPCCode(upcCode);
             
             if (result.length === 0) {
-                return res.status(404).json("No data");
+                return res.status(404).json("No data.");
             }
 
             return res.status(200).json(result);
@@ -18,19 +20,34 @@ module.exports = {
 
     create: async (req, res, next) => {
         try {
-            const { name, upc_code } = req.body;
+            let request;
 
-            // check if product already exists.
-            const duplicate = await productModel.getByUPCCode(upc_code);
-
-            if (duplicate.length > 0) {
-                return res.status(409).json("Duplicate record");
+            // to support both postman and python requests
+            if (Object.keys(req.query).length > 0) {
+                // express recognizes python get req. params as a "query" object in the req.
+                request = req.query;
+            }
+            else {
+                request = req.body;
             }
 
-            const result = await productModel.create(name, upc_code);
+            if (!request.name || !request.upcCode) {
+                return res.status(404).json("Missing required name and/or upc code.");
+            }
+
+            const { name, upcCode } = request;
+
+            // check if product already exists.
+            const duplicate = await productModel.getByUPCCode(upcCode);
+
+            if (duplicate.length > 0) {
+                return res.status(409).json("Duplicate record.");
+            }
+
+            const result = await productModel.create(name, upcCode);
 
             if (result.length === 0) {
-                return res.status(404).json("No data");
+                return res.status(404).json("No data.");
             }
 
             return res.status(200).json(result);
