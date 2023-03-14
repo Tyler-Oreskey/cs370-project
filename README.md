@@ -1,18 +1,18 @@
-## Run the API:
-1. run command: **npm install**
+## Run this API:
+1. In the root of the project directory run the command: **npm install**
 2. create a **.env** file in the root of the project directory.
-3. use the **.env.sample** to configure what is needed inside the .env file.
-- The .env file should look like this:<br>
+3. Use the .env.sample file to see what is needed in the .env file
+- The .env file should contain:<br>
     ```
-    PORT=
-    DATABASE_CLIENT=
-    DATABASE_HOST=change this to db host
-    DATABASE_USER=
-    DATABASE_PASSWORD=change this to the db password
-    DATABASE_PATH=
-    SCHEMA=change this to the proper schema path
+    PORT=leave blank
+    DATABASE_CLIENT=leave blank
+    DATABASE_HOST=change this to AWS db host
+    DATABASE_USER=leave blank
+    DATABASE_PASSWORD=change this to the AWS db password
+    DATABASE_PATH=leave blank
+    SCHEMA=change this to the development schema path
     ```
 
-4. run the commands:
+4. In the project root directory, run the command:
     - **nodemon** or
     - **node index.js**
