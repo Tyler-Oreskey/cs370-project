@@ -1,7 +1,18 @@
-<h1>Run the API:</h1><br>
-    1: git clone https://github.com/Tyler-Oreskey/cs370-project.git<br>
+## Run the API:
+1. run command: **npm install**
+2. create a **.env** file in the root of the project directory.
+3. use the **.env.sample** to configure what is needed inside the .env file.
+- The .env file should look like this:<br>
+    ```
+    PORT=
+    DATABASE_CLIENT=
+    DATABASE_HOST=change this to db host
+    DATABASE_USER=
+    DATABASE_PASSWORD=change this to the db password
+    DATABASE_PATH=
+    SCHEMA=change this to the proper schema path
+    ```
 
-cd into root of project, then:<br>
-    2: run in terminal: npm install<br>
-    3: configure .env file for server startup and database connection<br>
-    3: run in terminal: nodemon or node index.js<br>
+4. run the commands:
+    - **nodemon** or
+    - **node index.js**
