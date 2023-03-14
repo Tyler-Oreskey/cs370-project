@@ -5,16 +5,16 @@ module.exports = {
         try {
             const { upcCode } = req.params;
 
-            const result = await productModel.getByUPCCode(upcCode);
+            const res = await productModel.getByUPCCode(upcCode);
             
-            if (result.length === 0) {
+            if (res.length === 0) {
                 return res.status(404).json("No data.");
             }
 
-            return res.status(200).json(result);
+            return res.status(200).json(res);
         }
-        catch(error) {
-            next(error);
+        catch(err) {
+            next(err);
         }
     },
 
@@ -27,22 +27,22 @@ module.exports = {
             }
 
             // check if product already exists.
-            const duplicate = await productModel.getByUPCCode(upcCode);
+            const dup = await productModel.getByUPCCode(upcCode);
 
-            if (duplicate.length > 0) {
+            if (dup.length > 0) {
                 return res.status(409).json("Duplicate record.");
             }
 
-            const result = await productModel.create(name, upcCode);
+            const res = await productModel.create(name, upcCode);
 
-            if (result.length === 0) {
+            if (res.length === 0) {
                 return res.status(404).json("No data.");
             }
 
-            return res.status(200).json(result);
+            return res.status(200).json(res);
         }
-        catch(error) {
-            next(error);
+        catch(err) {
+            next(err);
         }
     }
 }
