@@ -4,20 +4,20 @@ const tablename = 'products';
 
 module.exports = {
     getByUPCCode: (upcCode) => {
-        const result = knex
+        const res = knex
             .select('*')
             .from(tablename)
             .where('upc_code', upcCode);
 
-        return result;
+        return res;
     },
 
     create: (name, upcCode) => {
-        const result = knex
+        const res = knex
             .returning('id')
             .insert({ name, upc_code: upcCode })
             .into(tablename);
 
-        return result;
+        return res;
     }
 }
