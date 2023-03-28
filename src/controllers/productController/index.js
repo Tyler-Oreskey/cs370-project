@@ -5,13 +5,13 @@ module.exports = {
         try {
             const { upcCode } = req.params;
 
-            const res = await productModel.getByUPCCode(upcCode);
+            const result = await productModel.getByUPCCode(upcCode);
             
-            if (res.length === 0) {
+            if (result.length === 0) {
                 return res.status(404).json("No data.");
             }
 
-            return res.status(200).json(res);
+            return res.status(200).json(result);
         }
         catch(err) {
             next(err);
@@ -33,13 +33,13 @@ module.exports = {
                 return res.status(409).json("Duplicate record.");
             }
 
-            const res = await productModel.create(name, upcCode);
+            const result = await productModel.create(name, upcCode);
 
-            if (res.length === 0) {
+            if (result.length === 0) {
                 return res.status(404).json("No data.");
             }
 
-            return res.status(200).json(res);
+            return res.status(200).json(result);
         }
         catch(err) {
             next(err);
